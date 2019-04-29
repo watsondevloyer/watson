@@ -37,17 +37,7 @@ public class DBFactoryTest {
     /**
      * Method: createMysqlTest(String id)
      */
-    @Test
-    public void testCreateMysqlTest() throws Exception {
-      String sql="select projectName from tb_project where id=4";
-        MySqlOperations mangosteenDB = DBFactory.createMysqlTest("mangosteenDB");
-        Map<String, Object> stringObjectMap = mangosteenDB.queryForMap(sql);
-        for(Map.Entry<String,Object> map:stringObjectMap.entrySet()){
-            System.out.println(map.getKey());
-            System.out.println(map.getValue());
-        }
 
-    }
 
     /**
      * Method: createOracleTest(String id)
@@ -56,6 +46,17 @@ public class DBFactoryTest {
     public void testCreateOracleTest() throws Exception {
     }
 
+    @Test
+    public void testCreateMysqlTest() throws Exception {
+        String sql="select projectName from tb_project where id=4";
+        MySqlOperations mangosteenDB = DBFactory.createMysqlTest("mangosteenDB");
+        Map<String, Object> stringObjectMap = mangosteenDB.queryForMap(sql);
+        for(Map.Entry<String,Object> map:stringObjectMap.entrySet()){
+            System.out.println(map.getKey());
+            System.out.println(map.getValue());
+        }
+
+    }
     /**
      * Method: createRedisTest(String id)
      */
