@@ -7,6 +7,6 @@ import com.watson.dbtest.annotation.Redis;
  * @Description: TODO
  * @date 2019/4/235:52 PM
  */
-@Redis(id="90Redis",masterName = "mymaster",passwd = "redis",sentinelNodes = "10.10.111.94:6378;10.10.111.95:6378;10.10.111.96:6378")
+@Redis(id="90Redis",masterName = "xxx",passwd = "xxx",sentinelNodes = "10.10.xx.94:3;10.10.1x1.33:6378;10.10.xx.96:6378")
 public class RedisTest {
 }
