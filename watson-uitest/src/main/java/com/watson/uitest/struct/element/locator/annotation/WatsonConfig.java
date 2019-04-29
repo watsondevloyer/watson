@@ -5,9 +5,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.PARAMETER)
-public @interface ElementWaitTime {
+public @interface WatsonConfig {
 
-	int value() default 1; //智能等待元素出现的时长
+	int waitTime() default 1; //智能等待元素出现的时长单位秒
+
+	String seleniumServerStandaloneHubUrl() default "";
 }

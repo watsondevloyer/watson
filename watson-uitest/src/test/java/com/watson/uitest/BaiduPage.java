@@ -12,9 +12,10 @@ import com.watson.uitest.struct.Page;
 public class BaiduPage extends Page {
 
   @ID("kw")
-  private Element input;
+  public Element input;
 
   public void search(String value){
     input.sendKeys(value);
   }
 }
+

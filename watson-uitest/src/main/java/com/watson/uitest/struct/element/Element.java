@@ -18,11 +18,6 @@ import org.openqa.selenium.WebElement;
 public class Element {
 
     private WebElement webElement;
-    //元素的等待时长，作用域：当前page页上的所有element
-    private int waitTime;
-    //某个元素的等待时长，作用域：当前element,如果和@waitTime同时存在，优先级大于@WaitTime
-
-    private int elementWaitTime;
     private String comment;
     private Locator locator=new Locator();
 
@@ -49,7 +44,6 @@ public class Element {
             message.append("sendKeys 失败！找不到元素！");
         }
         log.info(message.toString());
-
     }
 
 

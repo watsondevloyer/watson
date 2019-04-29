@@ -24,6 +24,13 @@ public class Allocator {
         browserWindow.openWindow(url);
 
     }
+    public void addAndSetRemoteBrowserWindow(EngineType engineType, String url) {
+        BrowserWindow browserWindow =new BrowserWindow(WatsonDriver.createRemoteWebDriverEngine(engineType));
+        windows.add(browserWindow);
+        currentWindow= browserWindow;
+        browserWindow.openWindow(url);
+
+    }
 
     public void updateWindows(){
         int i=0;

@@ -24,4 +24,13 @@ public class WatsonWindowTest {
     }
 
 
+    @Test
+    public void testRunJqueryScript(){
+        WatsonWindow.openNewWindow(EngineType.WebDriverSafari,"http:www.baidu.com");
+        WatsonWindow.runJqueryScript("jQuery('#kw').val('jqueryTest');");
+    }
+
+
+
+
 }

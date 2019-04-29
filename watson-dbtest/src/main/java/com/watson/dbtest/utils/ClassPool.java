@@ -78,6 +78,22 @@ public class ClassPool {
         return classes;
     }
 
+    public static <T> T getAnnotation(Class<? extends Annotation> annotationClass){
+        Class<?> classes =null;
+        Set<Class<?>> classPool = getClassPool();
+        for(Class<?> clazz:classPool){
+            if(clazz.isAnnotationPresent(annotationClass)){
+                classes=clazz;
+                break;
+
+            }
+        }
+        if(classes!=null){
+            return (T)classes.getAnnotation(annotationClass);
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         Set<Class<?>> classes = ClassPool.getClassPool("org.junit");
         for (Class clazz : classes) {

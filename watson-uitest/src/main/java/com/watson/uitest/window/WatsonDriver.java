@@ -1,11 +1,18 @@
 package com.watson.uitest.window;
 
+import com.watson.ConfigConstValue;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static org.openqa.selenium.remote.DesiredCapabilities.*;
 
 /**
  * @author guochang.xie
@@ -35,6 +42,75 @@ public class WatsonDriver {
         }
     }
 
+    public static WebDriver createRemoteWebDriverEngine(EngineType enginetype){
+        switch (enginetype) {
+            case WebDriverIE:
+                return createRemoteWebDriverIEEngine();
+            case WebDriverFirefox:
+                return createRemoteWebDriverFireFoxEngine();
+            case WebDriverChrome:
+                return createRemoteWebDriverChromeEngine();
+            case WebDriverSafari:
+                return createRemoteWebDriverSafariEngine();
+            case HtmlUnit:
+                return createRemoteWebDriverHtmlUnitEngine();
+            default:
+                return null;
+        }
+    }
+
+    private static WebDriver createRemoteWebDriverHtmlUnitEngine() {
+        WebDriver driver=null;
+        try {
+            driver= new RemoteWebDriver(new URL(ConfigConstValue.seleniumServerStandaloneHubUrl), htmlUnit());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return driver;
+    }
+
+    private static WebDriver createRemoteWebDriverSafariEngine() {
+        WebDriver driver=null;
+        try {
+            driver= new RemoteWebDriver(new URL(ConfigConstValue.seleniumServerStandaloneHubUrl), safari());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return driver;
+    }
+
+    private static WebDriver createRemoteWebDriverChromeEngine() {
+        WebDriver driver=null;
+        try {
+            driver= new RemoteWebDriver(new URL(ConfigConstValue.seleniumServerStandaloneHubUrl), chrome());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return driver;
+    }
+
+    private static WebDriver createRemoteWebDriverFireFoxEngine() {
+        WebDriver driver=null;
+        try {
+            driver= new RemoteWebDriver(new URL(ConfigConstValue.seleniumServerStandaloneHubUrl), firefox());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return driver;
+    }
+
+    private static WebDriver createRemoteWebDriverIEEngine() {
+         WebDriver driver=null;
+        try {
+            driver= new RemoteWebDriver(new URL(ConfigConstValue.seleniumServerStandaloneHubUrl), internetExplorer());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return driver;
+    }
+
+
+
     private static WebDriver createWebDriverHtmlUnitEngine() {
         return new HtmlUnitDriver();
     }
@@ -44,6 +120,8 @@ public class WatsonDriver {
     }
 
     private static WebDriver createWebDriverChromeEngine() {
+        System.setProperty("webdriver.chrome.driver",
+                ConfigConstValue.chromeDriverPath);
         return new ChromeDriver();
     }
 
@@ -52,6 +130,7 @@ public class WatsonDriver {
     }
 
     private static WebDriver createWebDriverIEEngine() { return new InternetExplorerDriver();
+
     }
 
 

@@ -1,5 +1,6 @@
 package com.watson.uitest.finder;
 
+import com.watson.ConfigConstValue;
 import com.watson.uitest.WatsonWindow;
 import com.watson.uitest.struct.element.Element;
 import com.watson.uitest.struct.element.locator.Locator;
@@ -24,11 +25,20 @@ public class WebDriverElementFinder {
     }
 
     public boolean isElementExist() {
-        WebElement webElement = findElementOnly();
-        if(webElement!=null){
-            element.setWebElement(webElement);
-            return true;
+        int waitTime = ConfigConstValue.waitTime;
+        for (int i=0;i<waitTime*10;i++){
+            WebElement webElement = findElementOnly();
+            if(webElement!=null){
+                element.setWebElement(webElement);
+                return true;
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+
         return false;
     }
 

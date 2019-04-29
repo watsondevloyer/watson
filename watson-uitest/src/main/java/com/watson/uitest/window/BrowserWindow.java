@@ -51,4 +51,29 @@ public class BrowserWindow {
         webDriver.close();
         allocator.getWindows().remove(this);
     }
+
+    public String getTitle() {
+        focus();
+        return webDriver.getTitle();
+    }
+
+    public void refresh() {
+        focus();
+        webDriver.navigate().refresh();
+    }
+
+    public void goForward() {
+        focus();
+        webDriver.navigate().forward();
+    }
+
+    public void goBack() {
+        focus();
+        webDriver.navigate().back();
+    }
+
+    public void open(String url) {
+        focus();
+        webDriver.get(url);
+    }
 }

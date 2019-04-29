@@ -1,11 +1,10 @@
 package com.watson.uitest.struct;
+import com.esotericsoftware.reflectasm.ConstructorAccess;
+import com.esotericsoftware.reflectasm.FieldAccess;
 import com.watson.uitest.struct.element.Element;
 import com.watson.uitest.struct.element.locator.annotation.*;
-
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * @author guochang.xie
@@ -19,30 +18,26 @@ public class Page {
     }
 
     public void init(){
-        int waitTime=0;
-        if(this.getClass().getAnnotation(WaitTime.class)!=null){
-            WaitTime annotation = this.getClass().getAnnotation(WaitTime.class);
-            waitTime=annotation.value();
-        }
-        Field[] fields=this.getClass().getDeclaredFields();
+
+        FieldAccess fieldAccess=FieldAccess.get(this.getClass());
+        Field[] fields=fieldAccess.getFields();
         for(Field field:fields){
             if(Element.class.isAssignableFrom(field.getType())){
-                initLocator(field,waitTime);
+                initLocator(field);
             }
         }
 
     }
 
-    public void initLocator(Field field,int waitTime){
+    public void initLocator(Field field){
         Annotation[] annotations = field.getAnnotations();
         if (annotations.length>0){
             try {
-                Constructor<?> constructor = field.getType().getConstructor();
-                Element element = (Element) constructor.newInstance();
+                ConstructorAccess constructorAccess=ConstructorAccess.get(field.getType());
+                Element element = (Element) constructorAccess.newInstance();
                 field.setAccessible(true);
                 field.set(this,element);
                 element.setComment(field.getName());
-                element.setWaitTime(waitTime);
                 for(Annotation annotation:annotations){
                     if (ID.class.isAssignableFrom(annotation.annotationType())){
                         element.getLocator().addIdLocator(((ID)annotation).value());
@@ -68,18 +63,9 @@ public class Page {
                     if (PartialLinkText.class.isAssignableFrom(annotation.annotationType())){
                         element.getLocator().addPartialLinkTextLocator(((PartialLinkText)annotation).value());
                     }
-                    if(ElementWaitTime.class.isAssignableFrom(annotation.annotationType())){
-                        element.setElementWaitTime(((ElementWaitTime)annotation).value());
-                    }
 
                 }
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
                 e.printStackTrace();
             }
 
