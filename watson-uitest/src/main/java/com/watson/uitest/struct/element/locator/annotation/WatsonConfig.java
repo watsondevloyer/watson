@@ -12,4 +12,7 @@ public @interface WatsonConfig {
 	int waitTime() default 1; //智能等待元素出现的时长单位秒
 
 	String seleniumServerStandaloneHubUrl() default "";
+
+    String screenShotDir() default "/opt";
+
 }
