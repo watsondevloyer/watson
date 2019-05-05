@@ -37,7 +37,7 @@ public class Page {
                 Element element = (Element) constructorAccess.newInstance();
                 field.setAccessible(true);
                 field.set(this,element);
-                element.setComment(field.getName());
+                element.setComment(this.getClass().getName()+"["+field.getName()+"]");
                 for(Annotation annotation:annotations){
                     if (ID.class.isAssignableFrom(annotation.annotationType())){
                         element.getLocator().addIdLocator(((ID)annotation).value());

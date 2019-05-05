@@ -23,6 +23,7 @@ public class ConfigConstValue {
             waitTime=annotation.waitTime();
             seleniumServerStandaloneHubUrl=annotation.seleniumServerStandaloneHubUrl();
             screenShotDir=annotation.screenShotDir();
+            chromeDriverPath=annotation.chromeDriverPath();
 
         }
     }

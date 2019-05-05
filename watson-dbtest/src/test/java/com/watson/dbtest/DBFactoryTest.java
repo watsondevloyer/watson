@@ -9,11 +9,8 @@ import com.watson.dbtest.db.MySqlOperations;
 import com.watson.dbtest.db.RedisOperations;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,13 +23,6 @@ import java.util.Map;
 @Slf4j
 public class DBFactoryTest {
 
-    @Before
-    public void before() throws Exception {
-    }
-
-    @After
-    public void after() throws Exception {
-    }
 
     /**
      * Method: createMysqlTest(String id)

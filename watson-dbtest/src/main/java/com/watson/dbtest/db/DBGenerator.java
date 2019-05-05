@@ -1,6 +1,5 @@
 package com.watson.dbtest.db;
 
-import com.mongodb.DB;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.watson.dbtest.annotation.Mongo;

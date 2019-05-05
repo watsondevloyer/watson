@@ -15,4 +15,7 @@ public @interface WatsonConfig {
 
     String screenShotDir() default "/opt";
 
+    String chromeDriverPath() default  "";
+
+
 }

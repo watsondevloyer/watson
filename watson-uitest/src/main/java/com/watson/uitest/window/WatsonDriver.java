@@ -120,8 +120,7 @@ public class WatsonDriver {
     }
 
     private static WebDriver createWebDriverChromeEngine() {
-        System.setProperty("webdriver.chrome.driver",
-                ConfigConstValue.chromeDriverPath);
+        System.setProperty("webdriver.chrome.driver",ConfigConstValue.chromeDriverPath);
         return new ChromeDriver();
     }
 
